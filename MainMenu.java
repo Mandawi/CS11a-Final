@@ -5,8 +5,8 @@ public class MainMenu{
 		System.out.println("  |_________________________________|");
 		System.out.println("//__________________________________\\\\");
 		System.out.println("\\\\'''''''''''\\\\''''''''//'''''''''''//");
-        System.out.println("||             GameName             ||");
-        System.out.println("//''''''''''''*''''''''*''''''''''''\\\\");
+    System.out.println("||             GameName             ||");
+    System.out.println("//''''''''''''*''''''''*''''''''''''\\\\");
 		System.out.println("\\\\__________________________________//");
 		System.out.println("//__________________________________\\\\");
 		System.out.println("||Enter 1 to Start Game             ||");
@@ -38,7 +38,7 @@ public class MainMenu{
 			Selector(select, crrntMp);
 		}
 		else if (select==1){
-			//... toggles crrntMp
+			//... starts game -- StartGame() class or whatever it is called
 		}
 		else if (select==3){
 			System.exit(0);
