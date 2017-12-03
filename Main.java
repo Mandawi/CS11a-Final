@@ -150,13 +150,45 @@ public class Main{
   }
 
   /**
-  * returns the character of the given location on the array
-  * @param posx x position of the character to be looked at at
+  * reads player input
+  * @param input the character input by the user
+  */
+  public static void readInput() {
+    System.out.println("Input a character to move.");
+    char input = TextIO.getlnChar();
+    moveplayer(input);
+  }
+
+  /**
+  * uses the user's input to read ahead and, if possible, move
+  * @param posx x position of the character to be looked at
   * @param posy y position of the character to be changed
   * @param map 2d char array that is looked at
   * @return The character at that position of the 2d char array
   */
-  public static char readAhead(int pox, int posy, char[][] map){
+
+  // could we possibly use this to enter into the battle minigame?
+
+  public static char readAhead(char input, int posx, int posy, char[][] map){
+    if (input == 'w') {
+      if (map[posx][posy-1] = '-') {
+        posy -= 1;
+      }
+    } else if (input == 'a') {
+      if (map[posx-1][posy] = '-') {
+        posx -= 1;
+      }
+    } else if (input == 's') {
+      if (map[posx][posy+1] = '-') {
+        posy += 1;
+      }
+    } else if (input == 'd') {
+      if (map[posx+1][posy] = '-') {
+        posx += 1;
+      }
+    } else {
+      System.out.println("Please enter W, A, S, or D to move.");
+    }
     return map[posx][posy];
   }
 
