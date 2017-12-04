@@ -87,12 +87,12 @@ public class BattleMode {
     System.out.println("User's choice (--(A)Attack, (D)Destructive, (H)Heal--):");
     String choice=scn.nextLine();
     choice=choice.toUpperCase();
-    while((!choice.equals("A"))&&(!choice.equals("D"))&&(!choice.equals("C"))){
+    while((!choice.equals("A"))&&(!choice.equals("D"))&&(!choice.equals("H"))){
       System.out.println("Invalid input");
       System.out.println("User's choice (--(A)Attack, (D)Destructive, (H)Heal--):");
       choice=scn.nextLine();
       choice=choice.toUpperCase();
-      /*while(choice.equals("C")&&PlayerHealth==100){ //depends on what is full
+      /*while(choice.equals("B")&&PlayerHealth==100){ //depends on what is full
         System.out.println("Health already full");
         System.out.println("User's choice (--(A)Attack, (D)Destructive, (H)Heal--):");
         choice=scn.nextLine();
