@@ -16,7 +16,7 @@ public class Main{
   public void setHealth(int x) {
     this.PlayerHealth = x;
   }
-  
+
   public int getHealth() {
     return PlayerHealth;
   }
@@ -255,12 +255,25 @@ public class Main{
   }
 
   /**
+  * kills the specified enemy
+  * @param i the number of the enemy to be killed
+  * @param map the map array
+  */
+  public static void killEnemy(int i, char[][] map){
+    replaceEnemies("dead", map, i);
+    enemies[i][0] = -1;
+  }
+
+  /**
   * Runs operations so that all the (3) enemies on the map move forward in a random directions
   * @param map the map array
   * @return the map string
   */
   public static char[][] moveEnemies(char[][] map){
     for(int i = 0; i < enemies.length; i++){
+      if(enemies[i][0] == -1){
+        i++;
+      }
       String direction = getDirection();
       char ahead = readDirectionEnemies(direction, map, i);
       while(ahead == 'X' || ahead == '|' || ahead == '_'){
@@ -292,10 +305,12 @@ public class Main{
       updateMapEnemies(enemies[i][0]-1, enemies[i][1], 'E', map);
       updateMapEnemies(enemies[i][0], enemies[i][1], '-', map);
       enemies[i][0] = enemies[i][0]-1;
-    } else {
+    } else if (direction.equals("down")){
       updateMapEnemies(enemies[i][0]+1, enemies[i][1], 'E', map);
       updateMapEnemies(enemies[i][0], enemies[i][1], '-', map);
       enemies[i][0] = enemies[i][0]+1;
+    } else if (direction.equals("dead")){
+      updateMapEnemies(enemies[i][0], enemies[i][1], '-', map);
     }
     return map;
   }
