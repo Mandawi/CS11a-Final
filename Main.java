@@ -11,7 +11,7 @@ public class Main{
   static char player = 'O';
   static Boolean dead = false;
 
-  static int health = 100;
+  public static int PlayerHealth = 100;
 
   static int[][] enemies = {
       {5, 2},
