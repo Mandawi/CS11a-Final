@@ -11,7 +11,15 @@ public class Main{
   static char player = 'O';
   static Boolean dead = false;
 
-  public static int PlayerHealth = 100;
+  private int PlayerHealth = 100;
+
+  public void setHealth(int x) {
+    this.PlayerHealth = x;
+  }
+  
+  public int getHealth() {
+    return PlayerHealth;
+  }
 
   static int[][] enemies = {
       {5, 2},
