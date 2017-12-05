@@ -19,9 +19,10 @@ public class Main{
       movePlayer(map);
       map = moveEnemies(map);
     }
+    System.out.println("Thank you for playing.");
   }
 
-/*
+
   public static void movePlayer(){
     readInput(); //assigns posx and posy
     char next = readAhead();
@@ -29,7 +30,7 @@ public class Main{
     updateMap(oldPosx, oldPosy, next);
     runEvent(next);
     oldPosx=posx; oldPosy = posy;
-  }*/
+  }
 
 
   /**
