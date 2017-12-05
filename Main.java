@@ -4,7 +4,7 @@ import java.lang.*;
 
 public class Main{
   static int posx = 1;
-  static int posy = 1;;
+  static int posy = 1;
   static int oldPosx = 1;
   static int oldPosy = 1;
 
@@ -217,6 +217,8 @@ public class Main{
       } else {
         System.out.println("You can't go there!");
       }
+    } else if (input == 'x') {
+      dead = true;
     } else {
       System.out.println("Please enter W, A, S, or D to move.");
     }
