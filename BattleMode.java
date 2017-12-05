@@ -25,6 +25,11 @@ public class BattleMode {
     Thread.sleep(10000);
     PlayerPick();//throw rounds in there and let it increment until it reaches 5
   }
+  /**
+  @param CPUHealth health of computer ship
+  @param PlayerHealth health of user ship
+  @return PlayerHealth health of user ship
+  */
   public static void PlayerPick(/*int health*/){ //will change to int to return new health. //Should take in CPU health
     rounds+=1;
     System.out.printf("\n\n\n\n\n########   #######  ##     ## ##    ## ########");
@@ -64,7 +69,7 @@ public class BattleMode {
         System.out.printf("\n##     ## ");
         System.out.printf("\n #######  ");
     }
-    if (rounds==4){
+    if (rounds==4){ //or CPU/Player health is zero
       System.exit(0);
     }
     System.out.printf("\n\n\n____________________________________________________________________________________________________________________________________________________________________");
@@ -92,7 +97,7 @@ public class BattleMode {
       System.out.println("User's choice (--(A)Attack, (D)Destructive, (H)Heal--):");
       choice=scn.nextLine();
       choice=choice.toUpperCase();
-      /*while(choice.equals("B")&&PlayerHealth==100){ //depends on what is full
+      /*while(choice.equals("H")&&PlayerHealth==100){ //depends on what is full
         System.out.println("Health already full");
         System.out.println("User's choice (--(A)Attack, (D)Destructive, (H)Heal--):");
         choice=scn.nextLine();
@@ -123,7 +128,10 @@ public class BattleMode {
 
     /*********************************************        Player Interactions         *********************************************************************/
 
-
+    /**
+    @param CPUHealth health of computer ship
+    @param PlayerHealth health of player ship
+    */
   public static void UserAttack() throws InterruptedException {//throws IE lets Thread.sleep() work //Should take in CPU health
     Thread.sleep(1000);
     System.out.printf("\n\n\n                 |._");
@@ -149,7 +157,10 @@ public class BattleMode {
     Thread.sleep(4000);
     CPUPick();
   }
-
+  /**
+  @param CPUHealth health of computer ship
+  @param PlayerHealth health of player ship
+  */
   public static void UserDestructive() throws InterruptedException {//throws IE lets Thread.sleep() work //Should take in CPU health
     Thread.sleep(1000);
     System.out.printf("\n\n\n                 |._");
@@ -178,6 +189,10 @@ public class BattleMode {
     Thread.sleep(4000);
     CPUPick();
   }
+  /**
+  @param CPUHealth health of computer ship
+  @param PlayerHealth health of player ship
+  */
   public static void UserHeal() throws InterruptedException {//throws IE lets Thread.sleep() work //Should take in CPU health
     Thread.sleep(1000);
     System.out.printf("\n\n\n                 |._");
@@ -207,7 +222,10 @@ public class BattleMode {
 
   /*********************************************        CPU Interactions         *********************************************************************/
 
-
+  /**
+  @param CPUHealth health of computer ship
+  @param PlayerHealth health of player ship
+  */
   public static void CPUPick(/*int health*/) { //will change to int to return new health. //Should take in CPU health
     System.out.printf("\n\n\n____________________________________________________________________________________________________________________________________________________________________");
     System.out.printf("\n\n\n                 |._");
@@ -251,6 +269,10 @@ public class BattleMode {
       }
     }
   }
+  /**
+  @param CPUHealth health of computer ship
+  @param PlayerHealth health of player ship
+  */
   public static void CPUAttack() throws InterruptedException {//throws IE lets Thread.sleep() work //Should take in CPU health
     Thread.sleep(4000);
     System.out.printf("\n\n\n                 |._");
@@ -276,6 +298,10 @@ public class BattleMode {
     Thread.sleep(6000);
     PlayerPick();//with all updated variables
   }
+  /**
+  @param CPUHealth health of computer ship
+  @param PlayerHealth player of computer ship
+  */
   public static void CPUDestructive() throws InterruptedException {//throws IE lets Thread.sleep() work //Should take in CPU health
     Thread.sleep(4000);
     System.out.printf("\n\n\n                 |._");
@@ -304,6 +330,10 @@ public class BattleMode {
     Thread.sleep(6000);
     PlayerPick();
   }
+  /**
+  @param CPUHealth health of computer ship
+  @param PlayerHealth health of player ship
+  */
   public static void CPUHeal() throws InterruptedException {//throws IE lets Thread.sleep() work //Should take in CPU health
     Thread.sleep(4000);
     System.out.printf("\n\n\n                 |._");
