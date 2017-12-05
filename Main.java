@@ -9,12 +9,11 @@ public class Main{
   static int[][] enemies = {
       {5, 2},
       {19 ,18},
-      {9 ,20}
+      {9 ,19}
     };  //3 enemies, each with an x and y pos, this is the first map
 
   public static void main(String[] args){
     char[][] map = generateMap(1);
-    char map[][] = generateMap(1);//we can have the menu input which map here somehow
     while(!dead){
       displayMap(map);
       movePlayer(map);
@@ -161,35 +160,44 @@ public class Main{
 
   /**
   * uses the user's input to read ahead and, if possible, move
-  * @param posx x position of the character to be looked at
-  * @param posy y position of the character to be changed
+  * @param y y position of the character to be looked at
+  * @param x x position of the character to be changed
   * @param map 2d char array that is looked at
   * @return The character at that position of the 2d char array
   */
 
   // could we possibly use this to enter into the battle minigame?
 
-  public static char readAhead(char input, int posx, int posy, char[][] map){
+  public static char readAhead(char input, int y, int x, char[][] map){
     if (input == 'w') {
-      if (map[posx][posy-1] = '-') {
-        posy -= 1;
+      if (map[y][x-1] == '-') {
+        x -= 1;
       }
     } else if (input == 'a') {
-      if (map[posx-1][posy] = '-') {
-        posx -= 1;
+      if (map[y-1][x] == '-') {
+        y -= 1;
       }
     } else if (input == 's') {
-      if (map[posx][posy+1] = '-') {
-        posy += 1;
+      if (map[y][x+1] == '-') {
+        x += 1;
       }
     } else if (input == 'd') {
-      if (map[posx+1][posy] = '-') {
-        posx += 1;
+      if (map[y+1][x] == '-') {
+        y += 1;
       }
     } else {
       System.out.println("Please enter W, A, S, or D to move.");
     }
-    return map[posx][posy];
+    return map[y][x];
+  }
+
+
+  /**
+  * reads the given pos on the map string
+  * @return the char at that pos
+  */
+  public static char readAhead(int y, int x, char[][] map){
+    return map[y][x];
   }
 
   /**
@@ -218,29 +226,12 @@ public class Main{
   */
   public static char[][] moveEnemies(char[][] map){
     for(int i = 0; i < enemies.length; i++){
-      try
-      {
-        Thread.sleep(1000);
-      }
-      catch(InterruptedException e)
-      {
-        // this part is executed when an exception (in this example InterruptedException) occurs
-      }
       String direction = getDirection();
       char ahead = readDirectionEnemies(direction, map, i);
       while(ahead == 'X' || ahead == '|' || ahead == '_'){
-        try
-        {
-          Thread.sleep(1000);
-        }
-        catch(InterruptedException e)
-        {
-          // this part is executed when an exception (in this example InterruptedException) occurs
-        }
         direction = getDirection();
         ahead = readDirectionEnemies(direction, map, i);
       }
-
       map = replaceEnemies(direction, map, i);
     }
     return map;
@@ -251,7 +242,7 @@ public class Main{
   * @param direction the string of the direction the enemy is moving
   * @param map the map 2d array
   * @param i which enemy is moving
-  * @return  the map array
+  * @return the new map array
   */
   public static char[][] replaceEnemies(String direction, char[][] map, int i){
     if (direction.equals("left")){
