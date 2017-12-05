@@ -16,7 +16,7 @@ public class Main{
     char[][] map = generateMap(1);
     while(!dead){
       displayMap(map);
-      movePlayer(map);
+      getInput(map);
       map = moveEnemies(map);
     }
   }
@@ -152,10 +152,10 @@ public class Main{
   * reads player input
   * @param input the character input by the user
   */
-  public static void readInput() {
+  public static void getInput(char[][] map) {
     System.out.println("Input a character to move.");
     char input = TextIO.getlnChar();
-    moveplayer(input);
+    readInput(input, map);
   }
 
   /**
@@ -168,27 +168,30 @@ public class Main{
 
   // could we possibly use this to enter into the battle minigame?
 
-  public static char readAhead(char input, int y, int x, char[][] map){
+  public static char readInput(char input, int y, int x, char[][] map){
+    int thisY = y; //placeholder for the new y and x values
+    int thisX = x;
     if (input == 'w') {
-      if (map[y][x-1] == '-') {
-        x -= 1;
-      }
+      thisX = x-1;
+      readAhead(y, thisX, map);
     } else if (input == 'a') {
-      if (map[y-1][x] == '-') {
-        y -= 1;
-      }
+      thisY = y-1;
+      readAhead(thisY, x, map);
     } else if (input == 's') {
-      if (map[y][x+1] == '-') {
-        x += 1;
-      }
+      thisX = x+1;
+      readAhead(y, thisX, map);
     } else if (input == 'd') {
-      if (map[y+1][x] == '-') {
-        y += 1;
-      }
+      thisY = y+1;
+      readAhead(thisY, x, map);
     } else {
       System.out.println("Please enter W, A, S, or D to move.");
     }
-    return map[y][x];
+    if (map[y][x] = '-') {
+      y = thisY;
+      x = thisX;
+    } else {
+      System.out.println("You can't go there!");
+    }
   }
 
 
