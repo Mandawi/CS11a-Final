@@ -3,12 +3,8 @@ import java.time.Instant;
 import java.lang.*;
 
 public class Main{
-  static int posx = 1;
-  static int posy = 1;
-  static int oldPosx = 1;
-  static int oldPosy = 1;
-
-  static char player = 'O';
+  static int posx, posy;
+  static int oldPosx, oldPosy;
   static Boolean dead = false;
   static int[][] enemies = {
       {5, 2},
@@ -20,7 +16,7 @@ public class Main{
     char[][] map = generateMap(1);
     while(!dead){
       displayMap(map);
-      getInput(map);
+      movePlayer(map);
       map = moveEnemies(map);
     }
     System.out.println("Thank you for playing.");
@@ -135,16 +131,7 @@ public class Main{
   * @param map 2d char array that is being changed
   * @return The 2d char array with the changes
   */
-  public static char[][] updateMapPlayer(int posx, int posy, char c, char[][] map){
-    c = player;
-    map[posy][posx] = c;
-    map[oldPosy][oldPosx] = '-';
-    oldPosy = posy;
-    oldPosx = posx;
-    return map;
-  }
-
-  public static char[][] updateMapEnemies(int posx, int posy, char c, char[][] map){
+  public static char[][] updateMap(int posx, int posy, char c, char[][] map){
     map[posx][posy] = c;
     return map;
   }
@@ -160,17 +147,16 @@ public class Main{
       }
       System.out.print("\n");
     }
-    updateMapPlayer(posx, posy, player, map);
   }
 
   /**
   * reads player input
   * @param input the character input by the user
   */
-  public static void getInput(char[][] map) {
+  public static void readInput() {
     System.out.println("Input a character to move.");
     char input = TextIO.getlnChar();
-    readInput(input, posy, posx, map);
+    moveplayer(input);
   }
 
   /**
@@ -183,46 +169,27 @@ public class Main{
 
   // could we possibly use this to enter into the battle minigame?
 
-  public static void readInput(char input, int y, int x, char[][] map){
-    int thisY = y; //placeholder for the new y and x values
-    int thisX = x;
+  public static char readAhead(char input, int y, int x, char[][] map){
     if (input == 'w') {
-      thisY = y-1;
-      readAhead(thisY, x, map);
-      if (map[y][x] == '-') {
-        posy = thisY;
-      } else {
-        System.out.println("You can't go there!");
+      if (map[y][x-1] == '-') {
+        x -= 1;
       }
     } else if (input == 'a') {
-      thisX = x-1;
-      readAhead(y, thisX, map);
-      if (map[y][x] == '-') {
-        posx = thisX;
-      } else {
-        System.out.println("You can't go there!");
+      if (map[y-1][x] == '-') {
+        y -= 1;
       }
     } else if (input == 's') {
-      thisY = y+1;
-      readAhead(y, thisX, map);
-      if (map[y][x] == '-') {
-        posy = thisY;
-      } else {
-        System.out.println("You can't go there!");
+      if (map[y][x+1] == '-') {
+        x += 1;
       }
     } else if (input == 'd') {
-      thisX = x+1;
-      readAhead(y, thisX, map);
-      if (map[y][x] == '-') {
-        posx = thisX;
-      } else {
-        System.out.println("You can't go there!");
+      if (map[y+1][x] == '-') {
+        y += 1;
       }
-    } else if (input == 'x') {
-      dead = true;
     } else {
       System.out.println("Please enter W, A, S, or D to move.");
     }
+    return map[y][x];
   }
 
 
@@ -280,20 +247,20 @@ public class Main{
   */
   public static char[][] replaceEnemies(String direction, char[][] map, int i){
     if (direction.equals("left")){
-      updateMapEnemies(enemies[i][0], enemies[i][1]-1, 'E', map);
-      updateMapEnemies(enemies[i][0], enemies[i][1], '-', map);
+      updateMap(enemies[i][0], enemies[i][1]-1, 'E', map);
+      updateMap(enemies[i][0], enemies[i][1], '-', map);
       enemies[i][1] = enemies[i][1] -1;
     } else if (direction.equals("right")){
-      updateMapEnemies(enemies[i][0], enemies[i][1]+1, 'E', map);
-      updateMapEnemies(enemies[i][0], enemies[i][1], '-', map);
+      updateMap(enemies[i][0], enemies[i][1]+1, 'E', map);
+      updateMap(enemies[i][0], enemies[i][1], '-', map);
       enemies[i][1] = enemies[i][1]+1;
     } else if (direction.equals("up")){
-      updateMapEnemies(enemies[i][0]-1, enemies[i][1], 'E', map);
-      updateMapEnemies(enemies[i][0], enemies[i][1], '-', map);
+      updateMap(enemies[i][0]-1, enemies[i][1], 'E', map);
+      updateMap(enemies[i][0], enemies[i][1], '-', map);
       enemies[i][0] = enemies[i][0]-1;
     } else {
-      updateMapEnemies(enemies[i][0]+1, enemies[i][1], 'E', map);
-      updateMapEnemies(enemies[i][0], enemies[i][1], '-', map);
+      updateMap(enemies[i][0]+1, enemies[i][1], 'E', map);
+      updateMap(enemies[i][0], enemies[i][1], '-', map);
       enemies[i][0] = enemies[i][0]+1;
     }
     return map;
