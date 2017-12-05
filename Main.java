@@ -10,6 +10,9 @@ public class Main{
 
   static char player = 'O';
   static Boolean dead = false;
+
+  static int health = 100;
+
   static int[][] enemies = {
       {5, 2},
       {19 ,18},
@@ -21,21 +24,11 @@ public class Main{
     while(!dead){
       displayMap(map);
       getInput(map);
+      updateMapPlayer(posx, posy, player, map);
       map = moveEnemies(map);
     }
     System.out.println("Thank you for playing.");
   }
-
-
-  public static void movePlayer(){
-    readInput(); //assigns posx and posy
-    char next = readAhead();
-    updateMap(posx, posy, 'X'); //or whatever we want the player to be
-    updateMap(oldPosx, oldPosy, next);
-    runEvent(next);
-    oldPosx=posx; oldPosy = posy;
-  }
-
 
   /**
   * returns a map to char[][]
@@ -144,6 +137,7 @@ public class Main{
     return map;
   }
 
+
   public static char[][] updateMapEnemies(int posx, int posy, char c, char[][] map){
     map[posx][posy] = c;
     return map;
@@ -160,7 +154,6 @@ public class Main{
       }
       System.out.print("\n");
     }
-    updateMapPlayer(posx, posy, player, map);
   }
 
   /**
@@ -173,47 +166,47 @@ public class Main{
     readInput(input, posy, posx, map);
   }
 
+
+
   /**
-  * uses the user's input to read ahead and, if possible, move
-  * @param y y position of the character to be looked at
-  * @param x x position of the character to be changed
-  * @param map 2d char array that is looked at
-  * @return The character at that position of the 2d char array
+  * accepts teh players input to change posy and posx so they can be modified later
+  * @param input the character the user inputted
+  * @param y the y value
+  * @param x the x value
+  * @param map the map file
   */
-
-  // could we possibly use this to enter into the battle minigame?
-
   public static void readInput(char input, int y, int x, char[][] map){
     int thisY = y; //placeholder for the new y and x values
     int thisX = x;
+    char c = ' ';
     if (input == 'w') {
       thisY = y-1;
-      readAhead(thisY, x, map);
-      if (map[y][x] == '-') {
+      c = readAhead(thisY, x, map);
+      if (c == '-') {
         posy = thisY;
       } else {
         System.out.println("You can't go there!");
       }
     } else if (input == 'a') {
       thisX = x-1;
-      readAhead(y, thisX, map);
-      if (map[y][x] == '-') {
+      c = readAhead(y, thisX, map);
+      if (c == '-') {
         posx = thisX;
       } else {
         System.out.println("You can't go there!");
       }
     } else if (input == 's') {
       thisY = y+1;
-      readAhead(y, thisX, map);
-      if (map[y][x] == '-') {
+      c = readAhead(thisY, x, map);
+      if (c == '-') {
         posy = thisY;
       } else {
         System.out.println("You can't go there!");
       }
     } else if (input == 'd') {
       thisX = x+1;
-      readAhead(y, thisX, map);
-      if (map[y][x] == '-') {
+      c = readAhead(y, thisX, map);
+      if (c == '-') {
         posx = thisX;
       } else {
         System.out.println("You can't go there!");
@@ -228,7 +221,7 @@ public class Main{
 
   /**
   * reads the given pos on the map string
-  * @return the char at that pos
+  * @return the char at that po
   */
   public static char readAhead(int y, int x, char[][] map){
     return map[y][x];
