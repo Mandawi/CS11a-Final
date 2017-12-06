@@ -1,5 +1,15 @@
 import java.util.*;
+import java.time.Instant;
+import java.lang.*;
+
 public class MainMenu{
+	private static int crrntMp = 1;
+	public int getMap() {
+	     return crrntMp;
+	}
+	public void setMap(int x) {
+		this.crrntMp = x;
+	}
 	public static void main(String[] args) {
 		System.out.println("  ._________________________________."); //prints the menu
 		System.out.println("  |_________________________________|");
@@ -17,7 +27,6 @@ public class MainMenu{
 		System.out.println("\\\\__________________________________//");
 		System.out.println("  |_________________________________|");
 		System.out.println("  |_________________________________|");
-		int crrntMp=1;
 		System.out.println("Current Map:"+crrntMp);  //shows what's the current map is
 		Scanner scn=new Scanner(System.in);
 		System.out.print("Input: "); //asks the user for input
@@ -36,12 +45,16 @@ public class MainMenu{
 		main(empty);
 	}
 	public static void Selector(int select, int crrntMp){
+		MainMenu menuObject = new MainMenu();
+		crrntMp=menuObject.getMap();
 		if (select==3){
 			if (crrntMp==1||crrntMp==2){
 				crrntMp+=1;
+				menuObject.setMap(crrntMp);
 			}
 			else if (crrntMp==3){
 				crrntMp-=2;
+				menuObject.setMap(crrntMp);
 			}
 			System.out.println("____________________________________");
 			System.out.println("Current Map:"+crrntMp);
