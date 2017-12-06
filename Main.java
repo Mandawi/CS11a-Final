@@ -379,4 +379,20 @@ public class Main{
       return "down";
     }
   }
+
+  /**
+  * returns which enemy if any is at certain coordinates
+  * @param y the y coord to be checked
+  * @param x the x coord to be checked
+  * @return which enemy is at the cood, -1 if there is not enemy there
+  */
+  public static int enemyAt(int y, int x){
+    for (int f = 0; f < enemies.length, f++){
+      if(enemies[f][0] == y && enemies[f][1] == x){
+        return f;
+      }
+    }
+    return -1;
+  }
+
 }
