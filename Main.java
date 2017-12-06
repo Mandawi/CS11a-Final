@@ -39,6 +39,24 @@ public class Main{
   }
 
   /**
+  * find out if all the enemies are dead
+  * @return true if all enemies are dead
+  */
+  public static Boolean enemiesDead(){
+    int f = 0;
+    for(int i = 0; i < enemies.length; i++){
+      if(enemies[i][0] == -1){
+        f++;
+      }
+    }
+    if(f==enemies.length){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
   * returns a map to char[][]
   * @param which is which map we use
   * @return the now-full 2d char array of the map
