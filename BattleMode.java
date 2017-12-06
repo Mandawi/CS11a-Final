@@ -1,4 +1,6 @@
 import java.util.*;
+import java.time.Instant;
+import java.lang.*;
 public class BattleMode {
   public static void main(String[] args) throws InterruptedException {//throws IE lets Thread.sleep() work
     String[] empty=new String[1];
@@ -24,7 +26,7 @@ public class BattleMode {
     System.out.println("You will pick one of 3: (A)Attack (damage to CPU from 0 to 50),\n (D)Destructive Attack (different damage to both ships from 0 to 100),\n or (H)Heal (Increase player health by 0 to full)\n");
     System.out.println("Each one of them will produce a somewhat random amount of points (e.g. you could pick heal and get 0 healing points)\n");
     System.out.println("The computer will get to pick as well, after you do, and the points of their choice will also be somewhat random\n\n");
-    System.out.println("Battle mode ends after 5 rounds of action\n\n");
+    System.out.println("Battle mode ends after 3 rounds of action\n\n");
     System.out.println("Let the battle start!\n");
     Thread.sleep(10000);
     PlayerPick(PlayerHealth,CPUHealth, mainObject, rounds);//throw rounds in there and let it increment until it reaches 5
@@ -38,9 +40,12 @@ public class BattleMode {
     String[] empty=new String[1];
     rounds+=1;
     if(PlayerHealth<=0){
-      System.out.println("Game Over!\nThank you for playing.");
+      System.out.println("\nGame Over!\nThank you for playing.");
       System.exit(0);
     }else if(CPUHealth<=0){
+      mainObject.setHealth(PlayerHealth);
+      mainObject.main(empty);
+    }else if (rounds==4){ //or CPU/Player health is zero
       mainObject.setHealth(PlayerHealth);
       mainObject.main(empty);
     }else{
@@ -81,10 +86,6 @@ public class BattleMode {
       System.out.printf("\n       ##");
       System.out.printf("\n##     ## ");
       System.out.printf("\n #######  ");
-    }
-    if (rounds==4){ //or CPU/Player health is zero
-      mainObject.setHealth(PlayerHealth);
-      mainObject.main(empty);
     }
 
     System.out.printf("\n\n\n____________________________________________________________________________________________________________________________________________________________________");
@@ -244,7 +245,7 @@ public class BattleMode {
   public static void CPUPick(int PlayerHealth, int CPUHealth, Main mainObject,int rounds) {
     String[] empty=new String[1];
     if(PlayerHealth<=0){
-      System.out.println("Game Over!\nThank you for playing.");
+      System.out.println("\nGame Over!\nThank you for playing.");
       System.exit(0);
     }else if(CPUHealth<=0){
       mainObject.setHealth(PlayerHealth);
