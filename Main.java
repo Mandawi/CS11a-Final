@@ -29,9 +29,10 @@ public class Main{
 
   public static void main(String[] args){
     BattleMode bMObject = new BattleMode();
-    char[][] map = generateMap(1);
+    char[][] map = generateMap();
     boolean checker=enemiesDead();
     while(!dead&&!checker){
+      dead=enemiesDead();
       displayMap(map);
       getInput(map, bMObject);
       updateMapPlayer(posx, posy, player, map);
@@ -40,22 +41,22 @@ public class Main{
     System.out.println("Thank you for playing.");
   }
   /**
- * find out if all the enemies are dead
- * @return true if all enemies are dead
- */
- public static Boolean enemiesDead(){
-   int f = 0;
-   for(int i = 0; i < enemies.length; i++){
-     if(enemies[i][0] == -1){
-       f++;
-     }
-   }
-   if(f==enemies.length){
-     return true;
-   } else {
-     return false;
-   }
- }
+  * find out if all the enemies are dead
+  * @return true if all enemies are dead
+  */
+  public static Boolean enemiesDead(){
+    int f = 0;
+    for(int i = 0; i < enemies.length; i++){
+      if(enemies[i][0] == -1){
+        f++;
+      }
+    }
+    if(f==enemies.length){
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 
   /**
@@ -63,7 +64,10 @@ public class Main{
   * @param crrntMp is which map we use
   * @return the now-full 2d char array of the map
   */
-  public static char[][] generateMap(int crrntMp){
+
+  public static char[][] generateMap(){
+    MainMenu menuObject = new MainMenu();
+    int crrntMp=menuObject.getMap();
     if (crrntMp == 1){
       char[][] map  =  new char[][]{
         {  '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_' },
@@ -211,14 +215,16 @@ public class Main{
     int thisX = x;
     String[] empty=new String[1];
     char c = ' ';
+    int enemyPos=0;
     if (input == 'w') {
       thisY = y-1;
       c = readAhead(thisY, x, map);
       if (c == '-') {
         posy = thisY;
       } else if (c=='E'){
+        enemyPos= enemyAt(thisY,x);
         try {
-            bMObject.main(empty/*,thisY,x,map*/);
+          bMObject.main(empty);
         } catch(Exception InterruptedException) {
           // code to handle the exception
         }
@@ -231,8 +237,9 @@ public class Main{
       if (c == '-') {
         posx = thisX;
       } else if (c=='E'){
+        enemyPos= enemyAt(y,thisX);
         try {
-            bMObject.main(empty);
+          bMObject.main(empty);
         } catch(Exception InterruptedException) {
           // code to handle the exception
         }
@@ -245,8 +252,9 @@ public class Main{
       if (c == '-') {
         posy = thisY;
       } else if (c=='E'){
+        enemyPos= enemyAt(thisY,x);
         try {
-            bMObject.main(empty);
+          bMObject.main(empty);
         } catch(Exception InterruptedException) {
           // code to handle the exception
         }
@@ -259,8 +267,9 @@ public class Main{
       if (c == '-') {
         posx = thisX;
       } else if (c=='E'){
+        enemyPos= enemyAt(y,thisX);
         try {
-            bMObject.main(empty);
+          bMObject.main(empty);
         } catch(Exception InterruptedException) {
           // code to handle the exception
         }
@@ -309,6 +318,8 @@ public class Main{
   public static void killEnemy(int i, char[][] map){
     replaceEnemies("dead", map, i);
     enemies[i][0] = -1;
+    String[] empty=new String[1];
+    main(empty);
   }
   /**
   * Runs operations so that all the (3) enemies on the map move forward in a random directions
@@ -379,7 +390,6 @@ public class Main{
       return "down";
     }
   }
-
   /**
   * returns which enemy if any is at certain coordinates
   * @param y the y coord to be checked
@@ -387,12 +397,13 @@ public class Main{
   * @return which enemy is at the cood, -1 if there is not enemy there
   */
   public static int enemyAt(int y, int x){
-    for (int f = 0; f < enemies.length, f++){
+    for (int f = 0; f < enemies.length; f++){
       if(enemies[f][0] == y && enemies[f][1] == x){
         return f;
       }
     }
     return -1;
   }
+
 
 }
