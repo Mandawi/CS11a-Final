@@ -20,8 +20,8 @@ public class MainMenu{
 		System.out.println("  |_________________________________|");
 		System.out.println("//__________________________________\\\\");
 		System.out.println("\\\\'''''''''''\\\\''''''''//'''''''''''//");
-    System.out.println("||             GameName             ||");
-    System.out.println("//''''''''''''*''''''''*''''''''''''\\\\");
+    		System.out.println("||           Pirate Quest           ||");
+    		System.out.println("//''''''''''''*''''''''*''''''''''''\\\\");
 		System.out.println("\\\\__________________________________//");
 		System.out.println("//__________________________________\\\\");
 		System.out.println("||Enter 1 to Start Game             ||");
