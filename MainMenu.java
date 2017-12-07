@@ -21,6 +21,7 @@ public class MainMenu{
 		System.out.println("//__________________________________\\\\");
 		System.out.println("\\\\'''''''''''\\\\''''''''//'''''''''''//");
     		System.out.println("||           Pirate Quest           ||");
+		System.out.println("||  By Pure Programming Perfection  ||");
     		System.out.println("//''''''''''''*''''''''*''''''''''''\\\\");
 		System.out.println("\\\\__________________________________//");
 		System.out.println("//__________________________________\\\\");
